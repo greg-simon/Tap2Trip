@@ -1,7 +1,7 @@
 # Generated test data
 generated-taps.csv
 trips.csv
-errors.csv
+error.csv
 
 # Maven
 /target/

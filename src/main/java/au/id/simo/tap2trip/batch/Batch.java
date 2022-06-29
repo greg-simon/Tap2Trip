@@ -4,9 +4,13 @@ import au.id.simo.tap2trip.ChargeCalculator;
 import au.id.simo.tap2trip.Tap;
 import au.id.simo.tap2trip.TripProducer;
 import au.id.simo.tap2trip.UnknownChargeException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
@@ -84,9 +88,9 @@ public class Batch {
         Batch batch = new Batch(chargeCalc);
         try {
             BatchMetrics metrics = batch.process(
-                new FileReader(tapsCsv,StandardCharsets.UTF_8),
-                new FileWriter(tripsCsv, StandardCharsets.UTF_8),
-                new FileWriter(errorCsv, StandardCharsets.UTF_8)
+                new InputStreamReader(new FileInputStream(tapsCsv), StandardCharsets.UTF_8),
+                new OutputStreamWriter(new FileOutputStream(tripsCsv), StandardCharsets.UTF_8),
+                new OutputStreamWriter(new FileOutputStream(errorCsv), StandardCharsets.UTF_8)
             );
             metrics.printCounts(System.out);
         } catch (IOException ex) {
